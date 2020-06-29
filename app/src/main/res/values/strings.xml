@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name" translatable="false">INS MOZ</string>
+    <string name="email_address">Email do Utilizador</string>
+    <string name="password">Senha do Utilizador</string>
+    <string name="login_now">Entrar</string>
+    <string name="don_t_remember_password">Esqueceu a sua senha?</string>
+    <string name="desenvolvido">Desenvolvido Por UCM</string>
+    <string name="txt_impressao">Forneça sua impressão digital</string>
+    <string name="or">OU</string>
+    <string name="area_administrativa">Area Administrativa</string>
+    <string name="icon_menu">icon menu</string>
+    <string name="nome_usuario">Nome do Usuário</string>
+    <string name="menu_navegacao">Menu de Navegação</string>
+    <string name="sunday">Sun</string>
+    <string name="celsius">20ºC</string>
+    <string name="Monday">Mon</string>
+    <string name="tuesday">Tue</string>
+    <string name="wednesday">Wed</string>
+    <string name="thursday">Thu</string>
+    <string name="friday">Fri</string>
+    <string name="logo">logo</string>
+    <!-- TODO: Remove or change this placeholder text -->
+</resources>
