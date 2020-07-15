@@ -11,7 +11,11 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/logotipo"
         android:supportsRtl="true"
+
+        android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
+
+
         <activity android:name=".AprovarResultado" />
         <activity android:name=".ResultsPageContainer" />
         <activity android:name=".LoginPage" />
@@ -27,5 +31,7 @@
 
     <uses-permission android:name="android.permission.USE_FINGERPRINT"
         tools:ignore="ManifestOrder" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
 
 </manifest>
