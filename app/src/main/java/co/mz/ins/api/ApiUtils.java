@@ -11,8 +11,8 @@ public class ApiUtils extends Application {
 
     public static final String BASE_URL = "http://192.168.20.110/demo/";
 
-    public static SenaiteEndpoint getSenaiteEndpoint(Context c){
-        return new APIClient().getClient("http://192.168.0.100:8080/smartlabs/@@API/senaite/v1/", c).create(SenaiteEndpoint.class);
+    public static SenaiteEndpoint getSenaiteEndpoint(Context c, String BASE_URL){
+        return new APIClient().getClient(BASE_URL, c).create(SenaiteEndpoint.class);
     }
 
     public void getSenaite(){
