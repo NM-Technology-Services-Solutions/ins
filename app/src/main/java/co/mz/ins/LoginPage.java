@@ -1,8 +1,5 @@
 package co.mz.ins;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-
 import android.Manifest;
 import android.app.KeyguardManager;
 import android.content.Intent;
@@ -17,9 +14,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import co.mz.ins.Adapters.FingerPrintHandler;
 import co.mz.ins.Model.LoginResponse;
-import co.mz.ins.api.APIClient;
 import co.mz.ins.api.ApiUtils;
 import co.mz.ins.api.SenaiteEndpoint;
 import retrofit2.Call;
@@ -48,7 +46,7 @@ public class LoginPage extends AppCompatActivity {
         edtUsername = (EditText) findViewById(R.id.username);
         edtPassword = (EditText) findViewById(R.id.password);
         btnLogin = (Button) findViewById(R.id.btn_login);
-        userService = ApiUtils.getSenaiteEndpoint(this);
+        userService = ApiUtils.getSenaiteEndpoint(this, getString(R.string.apibaseurl));
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override

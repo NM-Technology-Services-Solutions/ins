@@ -7,15 +7,14 @@ import android.view.ViewGroup;
 
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import co.mz.ins.Adapters.RecylerViewAdapter;
 import co.mz.ins.Model.AnalysisRequestList;
 import co.mz.ins.Model.AnalysisResquest;
@@ -52,7 +51,7 @@ public class DesponivelFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        resultsAvailableService = ApiUtils.getSenaiteEndpoint(this.getContext());
+        resultsAvailableService = ApiUtils.getSenaiteEndpoint(this.getContext(), getString(R.string.apibaseurl));
         itemResultList= doFillResults();
         System.out.println("size" +itemResultList.size());
 
