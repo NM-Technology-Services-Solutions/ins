@@ -1,10 +1,10 @@
 package co.mz.ins;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class HomePage extends AppCompatActivity {
 
@@ -16,6 +16,8 @@ public class HomePage extends AppCompatActivity {
 
     public void resultados(View view) {
         Intent entrar = new Intent(this, ResultsPageContainer.class);
+        Bundle extras = getIntent().getExtras();
+
         startActivity(entrar);
     }
 
