@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/bg_login"
+    android:background="@color/dark_blue"
     android:padding="16dp"
     tools:context=".HomePage">
 
@@ -27,7 +27,8 @@
             android:layout_width="89dp"
             android:layout_height="match_parent"
             android:contentDescription="@string/icon_menu"
-            android:src="@drawable/ic_baseline_menu_24" />
+            android:src="@drawable/ic_baseline_menu_24"
+            android:tint="@color/purple"/>
     </LinearLayout>
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -39,6 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/purple"
+
             android:orientation="vertical"
             android:paddingRight="16dp"
             android:paddingBottom="3dp"
@@ -60,9 +62,9 @@
                   <ImageView
                       android:layout_width="16dp"
                       android:layout_height="16dp"
-                      android:layout_alignParentRight="true"
+                      android:layout_alignParentEnd="true"
                       android:layout_centerVertical="true"
-                      android:layout_marginRight="12dp"
+                      android:layout_marginEnd="12dp"
                       android:src="@drawable/arrow_white" />
 
 
@@ -73,6 +75,7 @@
                       android:layout_marginStart="12dp"
                       android:layout_marginTop="3dp"
                       android:layout_toEndOf="@+id/profile"
+                      android:layout_centerVertical="true"
                       android:fontFamily="@font/roboto_regular"
                       android:text="@string/nome_usuario"
                       android:textColor="#ffff"
@@ -314,6 +317,7 @@
                     app:cardElevation="2dp">
 
                     <RelativeLayout
+                        android:onClick="riquisitarScreen"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:padding="8dp">

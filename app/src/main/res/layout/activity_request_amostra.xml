@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="30dp"
+    android:background="@color/colorWhite"
+    tools:context=".RequestAmostra">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:ignore="UseCompoundDrawables">
+            <ImageView
+                android:id="@+id/amostra_backArrow_btn"
+                android:layout_width="wrap_content"
+                android:onClick="backHome"
+                android:background="@color/purple"
+                android:layout_height="wrap_content"
+                android:src="@drawable/arrow_back_24"
+                android:padding="5dp"
+                android:contextClickable="true"
+                android:tint="@color/colorWhite"
+                android:transitionName="trans_back_arrow_btn"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="120dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/requisitar_mostras"
+                android:textColor="@color/purple"
+                android:textSize="20sp"
+                android:layout_gravity="center"
+                android:fontFamily="@font/roboto_bold"
+                android:paddingBottom="20dp"/>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Codigo da amostra"
+                app:startIconDrawable="@drawable/dehaze_24"
+                app:startIconTint="@color/purple"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:boxStrokeColor="@color/purple"
+                app:hintTextColor="@color/purple"
+                app:endIconMode="clear_text"
+                app:endIconTint="@color/purple"
+                app:boxStrokeWidthFocused="2dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/colorWhite"
+                    android:inputType="text"/>
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@color/purple"
+            android:text="@string/enviar_solicitacao"
+            android:onClick="procurar"
+            android:textAllCaps="false"
+            android:elevation="5dp"
+            android:textColor="@color/colorWhite"/>
+
+
+
+    </LinearLayout>
+</ScrollView>

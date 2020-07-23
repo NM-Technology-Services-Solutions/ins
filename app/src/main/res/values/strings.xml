@@ -6,7 +6,6 @@
     <string name="don_t_remember_password">Esqueceu a sua senha?</string>
     <string name="desenvolvido">Desenvolvido Por UCM</string>
     <string name="txt_impressao">Forneça sua impressão digital</string>
-    <string name="or">OU</string>
     <string name="area_administrativa">Area Administrativa</string>
     <string name="icon_menu">icon menu</string>
     <string name="nome_usuario">Nome do Usuário</string>
@@ -19,8 +18,12 @@
     <string name="thursday">Thu</string>
     <string name="friday">Fri</string>
     <string name="logo">logo</string>
+    <string name="requisitar_mostras">Requisitar 2ª Via de Amostras</string>
+    <string name="enviar_solicitacao">Procurar</string>
+    <string name="nome_do_paciente">Nome do Paciente</string>
+    <string name="paciente_celular">+258 848 396 068</string>
+    <string name="contacto_string">Contacto:</string>
     <!-- TODO: Remove or change this placeholder text -->
-
 
 
 </resources>
