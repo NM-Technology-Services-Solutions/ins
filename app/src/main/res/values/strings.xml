@@ -23,6 +23,8 @@
     <string name="nome_do_paciente">Nome do Paciente</string>
     <string name="paciente_celular">+258 848 396 068</string>
     <string name="contacto_string">Contacto:</string>
+    <string name="notFound">Nenhum resultado\n encontrado</string>
+    <string name="voltar">Voltar</string>
     <!-- TODO: Remove or change this placeholder text -->
 
 

@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".AmostraSearchResult"></activity>
+        <activity android:name=".NotFoundAmostra"></activity>
+        <activity android:name=".AmostraSearchResult" />
         <activity android:name=".RequestAmostra" />
         <activity android:name=".AprovarResultado" />
         <activity android:name=".ResultsPageContainer" />
@@ -26,11 +27,11 @@
             </intent-filter>
         </activity>
     </application>
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-permission
         android:name="android.permission.USE_FINGERPRINT"
         tools:ignore="ManifestOrder" />
-
-    <uses-permission android:name="android.permission.INTERNET" />
 
     <dist:module dist:instant="true" />
 

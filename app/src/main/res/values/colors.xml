@@ -3,6 +3,7 @@
     <color name="colorPrimary">#00728a</color>
     <color name="colorAccent">#FF4081</color>
     <color name="dark_blue">#00728a</color>
+    <color name="colorBlack">#000</color>
     <color name="purple">#b42247</color>
     <color name="splash_color">#ccffffff</color>
     <color name="red_500">#ff0040</color>

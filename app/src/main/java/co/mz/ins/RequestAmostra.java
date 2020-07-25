@@ -6,11 +6,15 @@ import android.os.Bundle;
 import android.util.Pair;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class RequestAmostra extends AppCompatActivity {
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
+public class RequestAmostra extends AppCompatActivity {
+private TextInputEditText editText;
 
     ImageView amostra_backArrow_btn;
 
@@ -20,6 +24,7 @@ public class RequestAmostra extends AppCompatActivity {
         setContentView(R.layout.activity_request_amostra);
 
         amostra_backArrow_btn = findViewById(R.id.amostra_backArrow_btn);
+        editText = findViewById(R.id.codigoAmostra);
 
     }
 
@@ -39,7 +44,14 @@ public class RequestAmostra extends AppCompatActivity {
     }
 
     public void procurar(View view) {
-        Intent intent = new Intent(getApplicationContext(), AmostraSearchResult.class);
-        startActivity(intent);
+        String code = editText.getText().toString();
+        if (code.equals("12345")){
+            Intent intent = new Intent(getApplicationContext(), AmostraSearchResult.class);
+            startActivity(intent);
+        }else {
+            Intent intent = new Intent(getApplicationContext(), NotFoundAmostra.class);
+            startActivity(intent);
+        }
+
     }
 }

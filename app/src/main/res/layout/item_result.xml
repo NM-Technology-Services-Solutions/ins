@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="5dp"
-    android:background="@color/dark_blue"
+    android:background="@color/purple"
     android:orientation="horizontal"
     android:layout_marginTop="7dp">
 
@@ -42,6 +42,7 @@
             android:layout_gravity="center_vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:tint="@color/colorWhite"
             android:src="@drawable/check_circle"/>
     </LinearLayout>
 

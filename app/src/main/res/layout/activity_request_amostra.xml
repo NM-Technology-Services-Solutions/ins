@@ -4,7 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="30dp"
+    android:paddingTop="15dp"
+    android:paddingRight="30dp"
+    android:paddingLeft="30dp"
     android:background="@color/colorWhite"
     tools:context=".RequestAmostra">
 
@@ -61,8 +63,9 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
+                    android:id="@+id/codigoAmostra"
                     android:layout_height="match_parent"
-                    android:textColor="@color/colorWhite"
+                    android:textColor="#000"
                     android:inputType="text"/>
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>

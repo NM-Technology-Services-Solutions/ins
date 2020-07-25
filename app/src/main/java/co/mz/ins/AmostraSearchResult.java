@@ -1,5 +1,7 @@
 package co.mz.ins;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.lang.ref.ReferenceQueue;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,29 +28,31 @@ public class AmostraSearchResult extends AppCompatActivity {
     public AmostraSearchResult() {
     }
 
-    @Nullable
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        v= inflater.inflate(R.layout.amostra_search_result, container,false);
-        recyclerView = v.findViewById(R.id.amostra_resutl_item);
 
-       ResultSeachAdapter resultSeachAdapter = new ResultSeachAdapter(this, item_amostraList);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(resultSeachAdapter);
-        return v;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.amostra_search_result);
+
         item_amostraList = new ArrayList<>();
         item_amostraList.add((new Amostra("23/07/2020","Teste bla bla bla la")));
         item_amostraList.add((new Amostra("24/07/2020","Teste bla bla bla la")));
         item_amostraList.add((new Amostra("25/07/2020","Teste bla bla bla la")));
         item_amostraList.add((new Amostra("26/07/2020","Teste bla bla bla la")));
+        item_amostraList.add((new Amostra("23/07/2020","Teste bla bla bla la")));
+        item_amostraList.add((new Amostra("24/07/2020","Teste bla bla bla la")));
+        item_amostraList.add((new Amostra("25/07/2020","Teste bla bla bla la")));
+        item_amostraList.add((new Amostra("26/07/2020","Teste bla bla bla la")));
 
-        setContentView(R.layout.amostra_search_result);
+        recyclerView = findViewById(R.id.amostra_resutl_item);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(new ResultSeachAdapter(this,item_amostraList));
+
     }
 
     public void backSearchScreen(View view) {
+        Intent intent = new Intent(getApplicationContext(), RequestAmostra.class);
+        startActivity(intent);
     }
 }
