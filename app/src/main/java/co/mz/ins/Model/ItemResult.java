@@ -4,11 +4,13 @@ public class ItemResult {
 
     private String phone, name;
     private int img;
+    private boolean isSelected;
 
-    public ItemResult(String phone, String name, int img) {
+    public ItemResult(String phone, String name, int img, boolean isSelected) {
         this.phone = phone;
         this.name = name;
         this.img = img;
+        this.isSelected= isSelected;
     }
 
     public String getPhone() {
@@ -33,5 +35,13 @@ public class ItemResult {
 
     public void setImg(int img) {
         this.img = img;
+    }
+    public void setSelected(boolean selected) {
+        isSelected = selected;
+    }
+
+
+    public boolean isSelected() {
+        return isSelected;
     }
 }

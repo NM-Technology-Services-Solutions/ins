@@ -74,7 +74,7 @@ public class DesponivelFragment extends Fragment {
                 System.out.println(itemResultList.size());
                 for(AnalysisResquest ar: arl.getItems()){
                     System.out.println(ar.getGetClientID());
-                    itemResultList.add(new ItemResult(ar.getAuthor(),ar.getGetClientID().toString(), R.drawable.logotipo));
+                    itemResultList.add(new ItemResult(ar.getAuthor(),ar.getGetClientID().toString(), R.drawable.logotipo, false));
                     recylerViewAdapter.notifyDataSetChanged();
                 }
                 System.out.println("sizeeee "+itemResultList.size());

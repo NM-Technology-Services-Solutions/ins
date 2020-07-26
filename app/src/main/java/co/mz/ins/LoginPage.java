@@ -78,6 +78,7 @@ public class LoginPage extends AppCompatActivity {
                 //validate form
                /* if (validateLogin(username, password)) {
                     //do login
+                    System.out.println("kkkkkkkkk");
                     doLogin(username, password);
                 }*/
             }
@@ -116,6 +117,7 @@ public class LoginPage extends AppCompatActivity {
                         //login start main activity
                         Intent intent = new Intent(LoginPage.this, HomePage.class);
                         intent.putExtra("username", resObj.getItems().get(0).username);
+                        System.out.println(resObj.getItems().get(0).username);
 
                         startActivity(intent);
 

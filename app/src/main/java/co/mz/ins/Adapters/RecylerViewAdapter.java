@@ -10,13 +10,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import co.mz.ins.Model.ItemResult;
 import co.mz.ins.R;
 
@@ -60,14 +58,25 @@ public class RecylerViewAdapter extends RecyclerView.Adapter<RecylerViewAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.textView_nome.setText(mData.get(position).getName());
-        holder.textView_phone.setText(mData.get(position).getPhone());
-        holder.img.setImageResource(mData.get(position).getImg());
-
-
+    public void onBindViewHolder(@NonNull final MyViewHolder holder, int position) {
+        final ItemResult data = mData.get(position);
+        holder.textView_nome.setText(data.getName());
+        holder.textView_phone.setText(data.getPhone());
+        holder.img.setImageResource(data.getImg());
+        holder.textView_nome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                data.setSelected(!data.isSelected());
+                holder.chck.setVisibility(data.isSelected()? View.VISIBLE: View.INVISIBLE);
+            }
+        });
 
     }
+
+
+
+
+
 
     @Override
     public int getItemCount() {
@@ -78,12 +87,15 @@ public class RecylerViewAdapter extends RecyclerView.Adapter<RecylerViewAdapter.
         private LinearLayout item_result;
         private TextView textView_nome;
         private TextView textView_phone;
+        private  ImageView chck;
         private ImageView img;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+
             item_result = (LinearLayout) itemView.findViewById(R.id.result_item_id);
             textView_nome= (TextView) itemView.findViewById(R.id.paciente_name);
             textView_phone= (TextView) itemView.findViewById(R.id.nr_celular);
+            chck= itemView.findViewById(R.id.chck);
             img= (ImageView) itemView.findViewById(R.id.img_result);
         }
     }
