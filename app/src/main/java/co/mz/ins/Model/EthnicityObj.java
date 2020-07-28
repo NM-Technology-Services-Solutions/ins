@@ -3,7 +3,9 @@ package co.mz.ins.Model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class EthnicityObj {
+import java.io.Serializable;
+
+public class EthnicityObj implements Serializable {
 
     @SerializedName("url")
     @Expose

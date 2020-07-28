@@ -3,7 +3,9 @@ package co.mz.ins.Model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ObjectWorkflowStates {
+import java.io.Serializable;
+
+public class ObjectWorkflowStates implements Serializable {
 
     @SerializedName("review_state")
     @Expose

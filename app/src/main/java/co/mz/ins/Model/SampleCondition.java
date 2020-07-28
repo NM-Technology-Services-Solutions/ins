@@ -1,4 +1,6 @@
 package co.mz.ins.Model;
 
-public class SampleCondition {
+import java.io.Serializable;
+
+public class SampleCondition implements Serializable {
 }

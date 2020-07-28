@@ -1,10 +1,12 @@
 package co.mz.ins.Model;
 
-import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class AnalysisResquest {
+import java.io.Serializable;
+import java.util.List;
+
+public class AnalysisResquest implements Serializable {
 
     @SerializedName("SampleTypeTitle")
     @Expose
@@ -110,7 +112,7 @@ public class AnalysisResquest {
     private Object profilesUID;
     @SerializedName("Patient")
     @Expose
-    private Object patient;
+    private Patient patient;
     @SerializedName("analysisRequestTemplates")
     @Expose
     private Object analysisRequestTemplates;
@@ -639,11 +641,11 @@ public class AnalysisResquest {
         this.profilesUID = profilesUID;
     }
 
-    public Object getPatient() {
+    public Patient getPatient() {
         return patient;
     }
 
-    public void setPatient(Object patient) {
+    public void setPatient(Patient patient) {
         this.patient = patient;
     }
 
@@ -1326,6 +1328,47 @@ public class AnalysisResquest {
     public void setCreators(List<String> creators) {
         this.creators = creators;
     }
+
+
+   public class Patient implements Serializable {
+
+        @SerializedName("url")
+        @Expose
+        private String url;
+        @SerializedName("uid")
+        @Expose
+        private String uid;
+        @SerializedName("api_url")
+        @Expose
+        private String apiUrl;
+
+        public String getUrl() {
+            return url;
+        }
+
+        public void setUrl(String url) {
+            this.url = url;
+        }
+
+        public String getUid() {
+            return uid;
+        }
+
+        public void setUid(String uid) {
+            this.uid = uid;
+        }
+
+        public String getApiUrl() {
+            return apiUrl;
+        }
+
+        public void setApiUrl(String apiUrl) {
+            this.apiUrl = apiUrl;
+        }
+
+    }
+
+
 
 }
 

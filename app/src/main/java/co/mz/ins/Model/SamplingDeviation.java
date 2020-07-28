@@ -1,4 +1,6 @@
 package co.mz.ins.Model;
 
-public class SamplingDeviation {
+import java.io.Serializable;
+
+public class SamplingDeviation implements Serializable {
 }

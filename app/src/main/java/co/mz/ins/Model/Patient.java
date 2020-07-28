@@ -3,8 +3,9 @@ package co.mz.ins.Model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
-public class Patient {
+public class Patient implements Serializable {
 
     @SerializedName("MothersName")
     @Expose

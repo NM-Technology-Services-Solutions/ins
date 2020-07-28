@@ -3,16 +3,52 @@ package co.mz.ins.api;
 import android.app.Application;
 import android.content.Context;
 
+import java.util.List;
+
+import co.mz.ins.Model.AnalysisResquest;
+import co.mz.ins.Model.Patient;
+import co.mz.ins.R;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiUtils extends Application {
+    private static Retrofit retrofit = null;
+    static List<AnalysisResquest> res;
+    static Patient p;
+    static String token ;
+    public SenaiteEndpoint userService;
 
-    public static final String BASE_URL = "http://192.168.20.110/demo/";
+   // public static final String BASE_URL = "http://192.168.20.110/demo/";
 
-    public static SenaiteEndpoint getSenaiteEndpoint(Context c, String BASE_URL){
-        return new APIClient().getClient(BASE_URL, c).create(SenaiteEndpoint.class);
+    public  SenaiteEndpoint getSenaiteEndpoint(Context c, String BASE_URL){
+        return  this.getClient(BASE_URL, c).create(SenaiteEndpoint.class);
+    }
+    @Override
+    public void onCreate()
+    {
+        super.onCreate();
+        userService=new ApiUtils().getSenaiteEndpoint(this, getString(R.string.apibaseurl));
+    }
+
+
+
+    public  Retrofit getClient(String url, Context c) {
+
+        OkHttpClient client = new OkHttpClient();
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+
+        builder.addInterceptor(new AddCookiesInterceptor(c)); // VERY VERY IMPORTANT
+        builder.addInterceptor(new ReceivedCookiesInterceptor(c)); // VERY VERY IMPORTANT
+        client = builder.build();
+
+        retrofit = new Retrofit.Builder()
+                .baseUrl(url)
+                .addConverterFactory(GsonConverterFactory.create())
+                .client(client)
+                .build();
+
+        return retrofit;
     }
 
     public void getSenaite(){

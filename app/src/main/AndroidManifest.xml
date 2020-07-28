@@ -11,12 +11,16 @@
         android:roundIcon="@drawable/logotipo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:name=".api.ApiUtils"
         android:usesCleartextTraffic="true">
+
         <activity android:name=".NotFoundAmostra"></activity>
         <activity android:name=".AmostraSearchResult" />
         <activity android:name=".RequestAmostra" />
         <activity android:name=".AprovarResultado" />
         <activity android:name=".ResultsPageContainer" />
+        <activity android:name=".GetAnalysisRequest"/>
+        <activity android:name=".GetPatient"/>
         <activity android:name=".LoginPage" />
         <activity android:name=".HomePage" />
         <activity android:name=".MainActivity">

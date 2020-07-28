@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class AnalysisRequestList {
+public class AnalysisRequestList  {
     @SerializedName("count")
     @Expose
     private int count;

@@ -3,7 +3,9 @@ package co.mz.ins.Model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class CountryState {
+import java.io.Serializable;
+
+public class CountryState implements Serializable {
 
     @SerializedName("country")
     @Expose

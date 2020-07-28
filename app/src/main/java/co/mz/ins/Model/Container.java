@@ -1,4 +1,6 @@
 package co.mz.ins.Model;
 
-public class Container {
+import java.io.Serializable;
+
+public class Container implements Serializable {
 }

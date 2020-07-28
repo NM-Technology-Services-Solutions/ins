@@ -16,11 +16,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-
 import com.google.android.material.textfield.TextInputEditText;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import co.mz.ins.Adapters.FingerPrintHandler;
 import co.mz.ins.Model.LoginResponse;
 import co.mz.ins.api.ApiUtils;
@@ -66,21 +65,22 @@ public class LoginPage extends AppCompatActivity {
         edtUsername = findViewById(R.id.username);
         edtPassword = findViewById(R.id.password);
         btnLogin = findViewById(R.id.btn_login);
-        userService = ApiUtils.getSenaiteEndpoint(this, getString(R.string.apibaseurl));
+        userService = new ApiUtils().getSenaiteEndpoint(this, getString(R.string.apibaseurl));
+
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String username = edtUsername.getText().toString();
                 String password = edtPassword.getText().toString();
-                Intent intent = new Intent(LoginPage.this, HomePage.class);
-                startActivity(intent);
+                //Intent intent = new Intent(LoginPage.this, HomePage.class);
+                //startActivity(intent);
                 //validate form
-               /* if (validateLogin(username, password)) {
+               if (validateLogin(username, password)) {
                     //do login
                     System.out.println("kkkkkkkkk");
                     doLogin(username, password);
-                }*/
+                }
             }
         });
 
@@ -117,6 +117,8 @@ public class LoginPage extends AppCompatActivity {
                         //login start main activity
                         Intent intent = new Intent(LoginPage.this, HomePage.class);
                         intent.putExtra("username", resObj.getItems().get(0).username);
+
+
                         System.out.println(resObj.getItems().get(0).username);
 
                         startActivity(intent);

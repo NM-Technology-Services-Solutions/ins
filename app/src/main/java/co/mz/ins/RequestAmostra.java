@@ -6,17 +6,31 @@ import android.os.Bundle;
 import android.util.Pair;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
+import com.google.gson.Gson;
+
+import androidx.appcompat.app.AppCompatActivity;
+import co.mz.ins.Model.AnalysisRequestList;
+import co.mz.ins.Model.AnalysisResquest;
+import co.mz.ins.Model.Patient;
+import co.mz.ins.Model.PatientList;
+import co.mz.ins.api.ApiUtils;
+import co.mz.ins.api.SenaiteEndpoint;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class RequestAmostra extends AppCompatActivity {
 private TextInputEditText editText;
 
     ImageView amostra_backArrow_btn;
+    SenaiteEndpoint sampleService;
+    AnalysisResquest aR;
+    AnalysisRequestList aRl;
+    PatientList pL;
+    Patient p;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +39,10 @@ private TextInputEditText editText;
 
         amostra_backArrow_btn = findViewById(R.id.amostra_backArrow_btn);
         editText = findViewById(R.id.codigoAmostra);
+        sampleService = new ApiUtils().getSenaiteEndpoint(this, getString(R.string.apibaseurl));
+        aR=new AnalysisResquest();
+        p= new Patient();
+        pL = new PatientList();
 
     }
 
@@ -45,13 +63,50 @@ private TextInputEditText editText;
 
     public void procurar(View view) {
         String code = editText.getText().toString();
-        if (code.equals("12345")){
-            Intent intent = new Intent(getApplicationContext(), AmostraSearchResult.class);
-            startActivity(intent);
-        }else {
-            Intent intent = new Intent(getApplicationContext(), NotFoundAmostra.class);
-            startActivity(intent);
-        }
+           searchSampleById(code);
 
+    }
+// putextras the only solution
+
+
+    private AnalysisResquest searchSampleById(String code) {
+        Call<AnalysisRequestList> call = sampleService.getAnalysisRequestList(code);
+        System.out.println("Token: "+ code);
+         aRl= new AnalysisRequestList();
+        call.enqueue(new Callback<AnalysisRequestList>() {
+
+            @Override
+            public void onResponse(Call<AnalysisRequestList> call, Response<AnalysisRequestList> response) {
+                int statusCode = response.code();
+
+                System.out.println(statusCode);
+
+                String x= new Gson().toJson(response.body());
+                String y= new Gson().toJson(response.headers());
+
+                System.out.println(x);
+                System.out.println(y);
+                System.out.println(call.request().url());
+                //res = ar.getItems();
+                aRl = response.body();
+                aR=aRl.getItems().get(0);
+                System.out.println(aRl.getCount());
+                System.out.println(aR.getCreatorFullName());
+
+                Intent intent = new Intent(getApplicationContext(), GetPatient.class);
+                intent.putExtra("result", aR);
+                //intent.putExtra("patient",patient);
+                startActivity(intent);
+
+
+            }
+
+            @Override
+            public void onFailure(Call<AnalysisRequestList> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+        System.out.println("liu" + aR.getAuthor());
+        return aR;
     }
 }

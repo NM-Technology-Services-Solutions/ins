@@ -1,4 +1,6 @@
 package co.mz.ins.Model;
 
-public class Preservation {
+import java.io.Serializable;
+
+public class Preservation implements Serializable {
 }

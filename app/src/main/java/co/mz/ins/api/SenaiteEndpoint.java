@@ -4,7 +4,6 @@ import java.util.List;
 
 import co.mz.ins.Model.Analysis;
 import co.mz.ins.Model.AnalysisRequestList;
-import co.mz.ins.Model.AnalysisResquest;
 import co.mz.ins.Model.LoginResponse;
 import co.mz.ins.Model.Patient;
 import co.mz.ins.Model.PatientList;
@@ -32,10 +31,10 @@ public interface SenaiteEndpoint {
   //  Call<AnalysisResquest> getAnalysisServices();
 
 
-    @GET("analysisrequest/{analysisrequest}")
-    Call<AnalysisResquest> getAnalysisRequest(@Path("analysisrequest") String analysisresquest);
+    @GET("analysisrequest?complete=True")
+    Call<AnalysisRequestList> getAnalysisRequestList(@Query("id") String code);
 
-    @GET("analysisrequest")
+    @GET("analysisrequest?complete=True")
     Call<AnalysisRequestList> getAnalysisRequestList();
 
     //@GET("analysisservice/{analysisrequest}")

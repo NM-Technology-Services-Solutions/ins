@@ -1,4 +1,6 @@
 package co.mz.ins.Model;
 
-public class StorageLocation {
+import java.io.Serializable;
+
+public class StorageLocation implements Serializable {
 }

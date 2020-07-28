@@ -1,4 +1,6 @@
 package co.mz.ins.Model;
 
-public class Client extends JSONAPIObject{
+import java.io.Serializable;
+
+public class Client extends JSONAPIObject implements Serializable {
 }

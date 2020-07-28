@@ -51,7 +51,7 @@ public class DesponivelFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        resultsAvailableService = ApiUtils.getSenaiteEndpoint(this.getContext(), getString(R.string.apibaseurl));
+        resultsAvailableService = new ApiUtils().getSenaiteEndpoint(this.getContext(), getString(R.string.apibaseurl));
         itemResultList= doFillResults();
         System.out.println("size" +itemResultList.size());
 

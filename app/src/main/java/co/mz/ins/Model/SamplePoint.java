@@ -1,4 +1,6 @@
 package co.mz.ins.Model;
 
-public class SamplePoint {
+import java.io.Serializable;
+
+public class SamplePoint implements Serializable {
 }

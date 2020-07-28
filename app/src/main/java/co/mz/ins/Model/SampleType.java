@@ -3,7 +3,9 @@ package co.mz.ins.Model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class SampleType {
+import java.io.Serializable;
+
+public class SampleType implements Serializable {
 
     @SerializedName("url")
     @Expose
