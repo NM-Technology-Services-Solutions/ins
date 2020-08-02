@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_height="match_parent"
     android:padding="12dp"
-    tools:context=".DesponivelFragment">
+    tools:context="mz.ac.ucmins.views.DesponivelFragment">
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -14,7 +14,13 @@
         android:layout_height="match_parent">
 
     </androidx.recyclerview.widget.RecyclerView>
-
-
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="16dp"
+        android:contentDescription="Enviar"
+        android:src="@drawable/ic_action_send" />
 
 </LinearLayout>

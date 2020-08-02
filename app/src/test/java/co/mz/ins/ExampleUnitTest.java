@@ -1,4 +1,4 @@
-package co.mz.ins;
+package co.mz.ucmins;
 
 import org.junit.Test;
 

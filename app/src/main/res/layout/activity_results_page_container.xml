@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:background="@color/splash_color"
     android:layout_height="match_parent"
-    tools:context=".ResultsPageContainer">
+    tools:context="mz.ac.ucmins.views.ResultsPageContainer">
 
     <View
         android:layout_width="match_parent"

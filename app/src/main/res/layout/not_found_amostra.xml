@@ -6,7 +6,7 @@
     android:background="@color/colorWhite"
     android:padding="15dp"
     android:orientation="vertical"
-    tools:context=".NotFoundAmostra">
+    tools:context="mz.ac.ucmins.views.NotFoundAmostra">
 
     <LinearLayout
         android:layout_width="match_parent"
