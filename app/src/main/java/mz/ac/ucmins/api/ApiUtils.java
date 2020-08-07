@@ -21,6 +21,7 @@ public class ApiUtils extends Application {
 
    // public static final String BASE_URL = "http://192.168.20.110/demo/";
 
+
     public  SenaiteEndpoint getSenaiteEndpoint(Context c, String BASE_URL){
         return  this.getClient(BASE_URL, c).create(SenaiteEndpoint.class);
     }

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+<PreferenceCategory
+    android:title="@string/main_config_category_title">
+
+    <CheckBoxPreference
+        android:key="checkbox_preference"
+        android:title="@string/permitir_execucao_background"
+        android:defaultValue="@string/default_checkbox_preference"/>
+
+    <EditTextPreference
+        android:key="senaite_base_url_preference"
+        android:title="@string/title_senaite_base_url_preference"
+        android:defaultValue="http://2a6ee1155234.ngrok.io"
+        android:summary="@string/summary_senaite_base_url_preference"
+        android:dialogTitle="@string/dialog_title_senaite_base_url_preference"
+        android:dependency="checkbox_preference" />
+
+    <EditTextPreference
+        android:defaultValue="http://2a6ee1155234.ngrok.io"
+        android:key="senaite_root"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="Servidor Senaite" />
+
+</PreferenceCategory>
+
+
+
+</PreferenceScreen>

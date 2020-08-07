@@ -19,7 +19,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.DocumentReference;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -83,6 +85,7 @@ public class RecylerViewAdapter extends RecyclerView.Adapter<RecylerViewAdapter.
                 sendNotificationButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        System.out.println("Quase a enviar");
                         sendSampleRequestNotification(toSendData);
                     }
                 });
@@ -104,6 +107,7 @@ public class RecylerViewAdapter extends RecyclerView.Adapter<RecylerViewAdapter.
 
 
 
+
     }
 
     public void sendSampleRequestNotification(List<ItemResult> toSendData){
@@ -113,12 +117,12 @@ public class RecylerViewAdapter extends RecyclerView.Adapter<RecylerViewAdapter.
 //        //intent.putExtra("patient",patient);
 //        mContext.startActivity(intent);
 
-        // The topic name can be optionally prefixed with "/topics/".
-        String topic = "highScores";
-
+        // Save to Firebase".
+        Map<String, Object> contacts = new HashMap<>();
+        contacts.put("amostra",toSendData);
         FirebaseClient firebaseClient = new FirebaseClient();
         firebaseClient.db.collection("contacts")
-                .add(toSendData)
+                .add(contacts)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
@@ -130,6 +134,7 @@ public class RecylerViewAdapter extends RecyclerView.Adapter<RecylerViewAdapter.
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         System.out.println("failure");
+                        e.printStackTrace();
 
                     }
                 });

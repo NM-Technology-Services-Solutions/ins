@@ -10,6 +10,9 @@ import mz.ac.ucmins.views.PendenteFragment;
 
 public class ResultPageAdapter extends FragmentStateAdapter {
 
+    PendenteFragment pendenteFragment;
+    DesponivelFragment  desponivelFragment;
+
     public ResultPageAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
     }

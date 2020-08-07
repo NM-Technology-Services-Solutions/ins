@@ -1,15 +1,17 @@
 package mz.ac.ucmins.Model;
 
 
-import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class User {
+import java.io.Serializable;
+import java.util.List;
+
+public class User implements Serializable {
 
     @SerializedName("username")
     @Expose
-    private String username;
+    public String username;
     @SerializedName("visible_ids")
     @Expose
     private boolean visibleIds;

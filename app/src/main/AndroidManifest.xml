@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="co.mz.ucmins">
 
-
     <application
         android:name="mz.ac.ucmins.api.ApiUtils"
         android:allowBackup="true"
@@ -14,26 +13,35 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="mz.ac.ucmins.views.NotFoundAmostra" />
 
-        <activity android:name="mz.ac.ucmins.views.AmostraSearchResult" />
-        <activity android:name="mz.ac.ucmins.views.RequestAmostra" />
-        <activity android:name="mz.ac.ucmins.views.AprovarResultado" />
-        <activity android:name="mz.ac.ucmins.views.ResultsPageContainer" />
-        <activity android:name="mz.ac.ucmins.views.GetAnalysisRequest" />
-        <activity android:name="mz.ac.ucmins.views.GetPatient" />
-        <activity android:name="mz.ac.ucmins.views.LoginPage" />
-        <activity android:name="mz.ac.ucmins.views.HomePage" />
-        <activity android:name="mz.ac.ucmins.views.MainActivity">
+        <activity android:name="mz.ac.ucmins.views.SettingsActivity"
+            android:label="Settings"
+            android:parentActivityName="mz.ac.ucmins.views.HomePage">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="mz.ac.ucmins.views.HomePage"/>
+        </activity>
+        <activity android:name="mz.ac.ucmins.views.NotFoundAmostra" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name="mz.ac.ucmins.views.AmostraSearchResult" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name="mz.ac.ucmins.views.RequestAmostra" android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name="mz.ac.ucmins.views.AprovarResultado" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name="mz.ac.ucmins.views.ResultsPageContainer" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name="mz.ac.ucmins.views.GetAnalysisRequest" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name="mz.ac.ucmins.views.GetPatient" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name="mz.ac.ucmins.views.LoginPage" android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name="mz.ac.ucmins.views.HomePage" android:launchMode="singleTop" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name="mz.ac.ucmins.views.MainActivity" android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
-            android:value="default_notification_channel_id"/>
+            android:value="default_notification_channel_id" />
+
         <service
             android:name="mz.ac.ucmins.services.INSFirebaseService"
             android:enabled="true"
@@ -41,16 +49,14 @@
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
-
         </service>
     </application>
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-permission
         android:name="android.permission.USE_FINGERPRINT"
         tools:ignore="ManifestOrder" />
 
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <dist:module dist:instant="true" />
 
-
-    </manifest>
+</manifest>

@@ -48,4 +48,8 @@ public interface SenaiteEndpoint {
     @GET("login")
     Call<LoginResponse> login (@Query("__ac_name") String username, @Query("__ac_password") String password);
 
+
+    @GET("users/current")
+    Call<LoginResponse> getCurrentUser ();
+
 }

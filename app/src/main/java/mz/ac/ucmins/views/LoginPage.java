@@ -3,10 +3,12 @@ package mz.ac.ucmins.views;
 import android.Manifest;
 import android.app.KeyguardManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -16,13 +18,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.gson.Gson;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import co.mz.ucmins.R;
 import mz.ac.ucmins.Adapters.FingerPrintHandler;
 import mz.ac.ucmins.Model.LoginResponse;
-import co.mz.ucmins.R;
+import mz.ac.ucmins.Model.User;
 import mz.ac.ucmins.api.ApiUtils;
 import mz.ac.ucmins.api.SenaiteEndpoint;
 import retrofit2.Call;
@@ -46,6 +56,12 @@ public class LoginPage extends AppCompatActivity {
 
     Button btnLogin;
     SenaiteEndpoint userService;
+    SharedPreferences preferences ;
+    SharedPreferences.Editor editor ;
+
+    private FirebaseAuth mAuth;
+    private static final String TAG = "CustomAuthActivity";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +82,15 @@ public class LoginPage extends AppCompatActivity {
         edtUsername = findViewById(R.id.username);
         edtPassword = findViewById(R.id.password);
         btnLogin = findViewById(R.id.btn_login);
-        userService = new ApiUtils().getSenaiteEndpoint(this, getString(R.string.apibaseurl));
+        userService = new ApiUtils().getSenaiteEndpoint(this,getString(R.string.apibaseurl));
+
+        //preferences
+        preferences = getApplicationContext().getSharedPreferences("LoginPref", MODE_PRIVATE);
+        editor = preferences.edit();
+
+        //Firebase Authentication and Authorizations
+        mAuth= FirebaseAuth.getInstance();
+
 
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -106,7 +130,7 @@ public class LoginPage extends AppCompatActivity {
 
     }
 
-    private void doLogin(String username, String password) {
+    private void doLogin(final String username, final String password) {
 
         Call<LoginResponse> call = userService.login(username, password);
         call.enqueue(new Callback<LoginResponse>() {
@@ -114,15 +138,30 @@ public class LoginPage extends AppCompatActivity {
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 if (response.isSuccessful()) {
                     LoginResponse resObj = response.body();
+                    User user = resObj.getItems().get(0);
                     if (resObj.getItems().get(0).isAuthenticated()) {
+                        Gson gson = new Gson();
+                        String json = gson.toJson(user);
+
+                         editor.putString("username",username);
+                         editor.putString("password",password);
+                         editor.putString("LoginPref", json);
+                        editor.commit();
                         //login start main activity
                         Intent intent = new Intent(LoginPage.this, HomePage.class);
-                        intent.putExtra("username", resObj.getItems().get(0).username);
-                        intent.putExtra("user",resObj.getItems().get(0) );
+                        intent.putExtra("username", user);
+                        //intent.putExtra("user",resObj.getItems().get(0) );
 
 
-                        System.out.println(resObj.getItems().get(0).username);
-
+                        System.out.println(user.getUsername());
+                        System.out.println(user.toString());
+                        /*FirebaseUser currentUser = mAuth.getCurrentUser();
+                        if(currentUser!=null){
+                            System.out.println("user registered before: " +currentUser.getUid());
+                        }
+                        startFirebaseLogin(user,password);
+*/
+                        startFirebaseLogin(user,password);
                         startActivity(intent);
 
                     } else {
@@ -138,6 +177,33 @@ public class LoginPage extends AppCompatActivity {
                 Toast.makeText(LoginPage.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void startFirebaseLogin(final User user, final String password) {
+        // [START sign_in_custom]
+        System.out.println(user);
+
+
+        mAuth.signInWithEmailAndPassword(user.getEmail(),password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInWithCustomToken:success");
+                            System.out.println("Ja temos solucao");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            doLogin(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInWithCustomToken:failure", task.getException());
+                            Toast.makeText(LoginPage.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                            //updateUI(null);
+                            createAccount(user.getEmail(),password);
+                        }
+                    }
+                });
+        /* [END sign_in_custom] */
     }
 
     private boolean validateLogin(String username, String password) {
@@ -157,4 +223,95 @@ public class LoginPage extends AppCompatActivity {
         Intent entrar = new Intent(this, HomePage.class);
         startActivity(entrar);
     }
+
+    private void createAccount(String email, String password) {
+        Log.d(TAG, "createAccount:" + email);
+
+
+        //showProgressBar();
+
+        // [START create_user_with_email]
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "createUserWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            doLogin(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                            Toast.makeText(LoginPage.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                            //updateUI(null);
+                        }
+
+                        // [START_EXCLUDE]
+                        //hideProgressBar();
+                        // [END_EXCLUDE]
+                    }
+                });
+        // [END create_user_with_email]
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        doLogin(currentUser);
+    }
+
+    private void doLogin(FirebaseUser user) {
+            if (user != null) {
+
+                System.out.println("registred to firebase: " + user.getUid());
+
+            } else {
+
+                //registerToFirebase();
+
+            }
+
+    }
+
+    private void registerToFirebase(){
+        String username = edtUsername.getText().toString();
+        String password = edtPassword.getText().toString();
+
+        if (validateLogin(username, password)) {
+            //do login
+            System.out.println("Email e Password Prontos pra Firebase");
+
+            //showProgressBar();
+
+            // [START create_user_with_email]
+            mAuth.createUserWithEmailAndPassword(username+"", password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                Log.d(TAG, "createUserWithEmail:success");
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                //doLogin(user);
+                                System.out.println("User created and registered: " + user.getUid());
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                                // Toast.makeText(EmailPasswordActivity.this, "Authentication failed.",  Toast.LENGTH_SHORT).show();
+                                //updateUI(null);
+                            }
+
+                            // [START_EXCLUDE]
+                            //hideProgressBar();
+                            // [END_EXCLUDE]
+                        }
+                    });
+
+        }
+    }
+
 }

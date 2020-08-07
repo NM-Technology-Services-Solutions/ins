@@ -1,5 +1,6 @@
 package mz.ac.ucmins.views;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +27,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.content.Context.MODE_PRIVATE;
+
 
 public class DesponivelFragment extends Fragment {
     View v;
@@ -33,7 +36,12 @@ public class DesponivelFragment extends Fragment {
     RecylerViewAdapter recylerViewAdapter;
     private List<ItemResult> itemResultList;
     SenaiteEndpoint resultsAvailableService;
+    public int elementcount;
+    public SharedPreferences preferences;
+    public SharedPreferences.Editor editor;
+
     public DesponivelFragment() {
+        elementcount=0;
     }
 
     @Nullable
@@ -58,8 +66,10 @@ public class DesponivelFragment extends Fragment {
         resultsAvailableService = new ApiUtils().getSenaiteEndpoint(this.getContext(), getString(R.string.apibaseurl));
         itemResultList= doFillResults();
         System.out.println("size" +itemResultList.size());
+        preferences = this.getContext().getSharedPreferences("LoginPref", MODE_PRIVATE);
+        editor = preferences.edit();
 
-
+        ((ResultsPageContainer) getActivity()).drawBadge();
 
 
     }
@@ -80,14 +90,18 @@ public class DesponivelFragment extends Fragment {
                     System.out.println(ar.getGetClientID());
                     itemResultList.add(new ItemResult(ar.getAuthor(),ar.getGetClientID().toString(), R.drawable.logotipo, false));
                     recylerViewAdapter.notifyDataSetChanged();
+
                 }
                 System.out.println("sizeeee "+itemResultList.size());
                 String x= new Gson().toJson(response.body());
                 String y= new Gson().toJson(response.headers());
+                editor.putInt("resultados_disponiveis", itemResultList.size());
+                editor.commit();
 
-                System.out.println(x);
+                System.out.println("here"+preferences.getAll());
                 System.out.println(y);
                 //res = ar.getItems();
+
 
             }
             @Override

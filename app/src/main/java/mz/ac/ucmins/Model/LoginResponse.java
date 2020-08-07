@@ -1,14 +1,14 @@
-package mz.ac.ucmins.Model;
-
-
-
+package  mz.ac.ucmins.Model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.util.List;
 
-public class LoginResponse {
+
+
+public class LoginResponse implements Serializable
+{
 
     @SerializedName("count")
     @Expose
@@ -18,7 +18,7 @@ public class LoginResponse {
     private int pagesize;
     @SerializedName("items")
     @Expose
-    List<Item> items = null;
+    private List<User> items = null;
     @SerializedName("page")
     @Expose
     private int page;
@@ -34,6 +34,7 @@ public class LoginResponse {
     @SerializedName("previous")
     @Expose
     private Object previous;
+    private final static long serialVersionUID = -3598440127683897972L;
 
     public int getCount() {
         return count;
@@ -51,11 +52,11 @@ public class LoginResponse {
         this.pagesize = pagesize;
     }
 
-    public List<Item> getItems() {
+    public List<User> getItems() {
         return items;
     }
 
-    public void setItems(List<Item> items) {
+    public void setItems(List<User> items) {
         this.items = items;
     }
 
@@ -98,65 +99,5 @@ public class LoginResponse {
     public void setPrevious(Object previous) {
         this.previous = previous;
     }
-    public class Item implements Serializable {
 
-        @SerializedName("username")
-        @Expose
-         public String username;
-        @SerializedName("authenticated")
-        @Expose
-        boolean authenticated;
-        @SerializedName("groups")
-        @Expose
-        List<Object> groups = null;
-        @SerializedName("roles")
-        @Expose
-         List<String> roles = null;
-        @SerializedName("api_url")
-        @Expose
-        String apiUrl;
-
-        public String getUsername() {
-            return username;
-        }
-
-        public void setUsername(String username) {
-            this.username = username;
-        }
-
-        public boolean isAuthenticated() {
-            return authenticated;
-        }
-
-        public void setAuthenticated(boolean authenticated) {
-            this.authenticated = authenticated;
-        }
-
-        public List<Object> getGroups() {
-            return groups;
-        }
-
-        public void setGroups(List<Object> groups) {
-            this.groups = groups;
-        }
-
-        public List<String> getRoles() {
-            return roles;
-        }
-
-        public void setRoles(List<String> roles) {
-            this.roles = roles;
-        }
-
-        public String getApiUrl() {
-            return apiUrl;
-        }
-
-        public void setApiUrl(String apiUrl) {
-            this.apiUrl = apiUrl;
-        }
-
-    }
 }
-
-
