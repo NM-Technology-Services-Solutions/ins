@@ -18,6 +18,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
@@ -26,9 +30,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.gson.Gson;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import co.mz.ucmins.R;
 import mz.ac.ucmins.Adapters.FingerPrintHandler;
 import mz.ac.ucmins.Model.LoginResponse;
@@ -82,7 +83,7 @@ public class LoginPage extends AppCompatActivity {
         edtUsername = findViewById(R.id.username);
         edtPassword = findViewById(R.id.password);
         btnLogin = findViewById(R.id.btn_login);
-        userService = new ApiUtils().getSenaiteEndpoint(this,getString(R.string.apibaseurl));
+        userService = ApiUtils.getSenaiteEndpoint(this);
 
         //preferences
         preferences = getApplicationContext().getSharedPreferences("LoginPref", MODE_PRIVATE);
@@ -112,8 +113,9 @@ public class LoginPage extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             fingerprintManager = (FingerprintManager) getSystemService(FINGERPRINT_SERVICE);
             keyguardManager = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
-
-            if (!fingerprintManager.isHardwareDetected()) {
+            if (fingerprintManager == null) {
+                mTextImpressao.setText("Não Detectado FingerPrint No Despositivo");
+            } else if (!fingerprintManager.isHardwareDetected()) {
                 mTextImpressao.setText("Não Detectado FingerPrint No Despositivo");
             } else if (ContextCompat.checkSelfPermission(this, Manifest.permission.USE_FINGERPRINT) != PackageManager.PERMISSION_GRANTED) {
                 mTextImpressao.setText("Permissão não Concedida");
@@ -143,9 +145,9 @@ public class LoginPage extends AppCompatActivity {
                         Gson gson = new Gson();
                         String json = gson.toJson(user);
 
-                         editor.putString("username",username);
-                         editor.putString("password",password);
-                         editor.putString("LoginPref", json);
+                        editor.putString("username", username);
+                        editor.putString("password", password);
+                        editor.putString("LoginPref", json);
                         editor.commit();
                         //login start main activity
                         Intent intent = new Intent(LoginPage.this, HomePage.class);
@@ -153,28 +155,31 @@ public class LoginPage extends AppCompatActivity {
                         //intent.putExtra("user",resObj.getItems().get(0) );
 
 
-                        System.out.println(user.getUsername());
-                        System.out.println(user.toString());
+                        //System.out.println(user.getUsername());
+                        // System.out.println(user.toString());
                         /*FirebaseUser currentUser = mAuth.getCurrentUser();
                         if(currentUser!=null){
                             System.out.println("user registered before: " +currentUser.getUid());
                         }
                         startFirebaseLogin(user,password);
 */
-                        startFirebaseLogin(user,password);
+                        startFirebaseLogin(user, password);
                         startActivity(intent);
 
                     } else {
                         Toast.makeText(LoginPage.this, "The username or password is incorrect", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(LoginPage.this, "Error! Please try again!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginPage.this, "Error! Please  try again!", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call call, Throwable t) {
                 Toast.makeText(LoginPage.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(LoginPage.this, call.request().url().toString(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(LoginPage.this, SettingsActivity.class);
+                startActivity(intent);
             }
         });
     }

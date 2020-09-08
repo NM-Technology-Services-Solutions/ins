@@ -24,11 +24,12 @@ public interface SenaiteEndpoint {
     @GET("group/{id}/users")
     Call<List<User>> groupList(@Path("id") int groupId, @Query("sort") String sort);
 
+    //limit=5&b_start=0"
     @POST("users/new")
     Call<User> createUser(@Body User user);
 
-   // @GET("analysisrequest/")
-  //  Call<AnalysisResquest> getAnalysisServices();
+    // @GET("analysisrequest/")
+    //  Call<AnalysisResquest> getAnalysisServices();
 
 
     @GET("analysisrequest?complete=True")
@@ -37,19 +38,28 @@ public interface SenaiteEndpoint {
     @GET("analysisrequest?complete=True")
     Call<AnalysisRequestList> getAnalysisRequestList();
 
+    @GET("analysisrequest?complete=True")
+    Call<AnalysisRequestList> getAnalysisRequestList(@Query("limit") int limit, @Query("b_start") int start);
+
     //@GET("analysisservice/{analysisrequest}")
-   // Call<AnalysisService> getAnalysisRequest(@Path("analysisservice") String analysisservice);
+    // Call<AnalysisService> getAnalysisRequest(@Path("analysisservice") String analysisservice);
     @GET("analysis/{uid}")
     Call<Analysis> getAnalysis(@Path("uid") String uid);
+
     @GET("doctor/{uid}")
     Call<Patient> getDoctor(@Path("uid") String uid);
+
     @GET("patient/{uid}")
     Call<PatientList> getPatient(@Path("uid") String uid);
+
+    @GET("patient?complete=True")
+    Call<PatientList> getPatients();
+
     @GET("login")
-    Call<LoginResponse> login (@Query("__ac_name") String username, @Query("__ac_password") String password);
+    Call<LoginResponse> login(@Query("__ac_name") String username, @Query("__ac_password") String password);
 
 
     @GET("users/current")
-    Call<LoginResponse> getCurrentUser ();
+    Call<LoginResponse> getCurrentUser();
 
 }

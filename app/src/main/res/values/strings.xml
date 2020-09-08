@@ -42,7 +42,7 @@
         It should describe the category of notifications that will be sent through this channel
      -->
     <!-- [START fcm_default_icon_string] -->
-    <string name="default_notification_channel_name" translatable="true">Weather</string>
+    <string name="default_notification_channel_name" translatable="true">pedidos</string>
     <!-- [END fcm_default_icon_string] -->
     <string name="msg_subscribe_failed">Failed to subscribe to weather topic</string>
     <string name="fcm_message">FCM Message</string>
@@ -69,6 +69,11 @@
     <string name="title_senaite_base_url_preference">URL do Servidor Senaite</string>
     <string name="summary_senaite_base_url_preference">Insira aqui o URL do Servidor</string>
     <string name="dialog_title_senaite_base_url_preference">Senaite Server URL</string>
+    <string name="error_msg_unknown" />
+    <string name="tap_to_reload">Recarregar</string>
+    <string name="error_msg">Algo deu errado</string>
+    <string name="error_msg_timeout">Excedeu o tempo</string>
+    <string name="btn_retry">Tentar de novo</string>
 
 
 </resources>

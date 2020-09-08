@@ -336,6 +336,7 @@
                     android:layout_height="120dp"
                     android:layout_weight="1"
                     app:cardCornerRadius="8dp"
+                    android:onClick="verNotificacoesPendentes"
                     app:cardElevation="2dp">
 
                     <RelativeLayout
@@ -347,7 +348,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_bold"
-                            android:text="Carregar Resultados"
+                            android:text="Notificar Utentes"
                             android:textColor="#5E5E5E"
                             android:textSize="14sp" />
 

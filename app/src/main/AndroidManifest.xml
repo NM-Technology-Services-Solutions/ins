@@ -19,24 +19,49 @@
             android:parentActivityName="mz.ac.ucmins.views.HomePage">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="mz.ac.ucmins.views.HomePage"/>
+                android:value="mz.ac.ucmins.views.HomePage" />
         </activity>
-        <activity android:name="mz.ac.ucmins.views.NotFoundAmostra" android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name="mz.ac.ucmins.views.AmostraSearchResult" android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name="mz.ac.ucmins.views.RequestAmostra" android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name="mz.ac.ucmins.views.AprovarResultado" android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name="mz.ac.ucmins.views.ResultsPageContainer" android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name="mz.ac.ucmins.views.GetAnalysisRequest" android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name="mz.ac.ucmins.views.GetPatient" android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name="mz.ac.ucmins.views.LoginPage" android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name="mz.ac.ucmins.views.HomePage" android:launchMode="singleTop" android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name="mz.ac.ucmins.views.MainActivity" android:theme="@style/AppTheme.NoActionBar">
+        <activity
+            android:name="mz.ac.ucmins.views.NotFoundAmostra"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="mz.ac.ucmins.views.AmostraSearchResult"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="mz.ac.ucmins.views.RequestAmostra"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="mz.ac.ucmins.views.AprovarResultado"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="mz.ac.ucmins.views.ResultsPageContainer"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="mz.ac.ucmins.views.GetAnalysisRequest"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="mz.ac.ucmins.views.GetPatient"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="mz.ac.ucmins.views.LoginPage"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="mz.ac.ucmins.views.HomePage"
+            android:launchMode="singleTop"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="mz.ac.ucmins.views.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="mz.ac.ucmins.views.NotificationsPendentes"
+            android:parentActivityName="mz.ac.ucmins.views.HomePage"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"

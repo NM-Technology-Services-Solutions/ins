@@ -14,7 +14,6 @@ import mz.ac.ucmins.Model.AnalysisRequestList;
 import mz.ac.ucmins.Model.AnalysisResquest;
 import mz.ac.ucmins.Model.Patient;
 import mz.ac.ucmins.Model.PatientList;
-import co.mz.ucmins.R;
 import mz.ac.ucmins.api.ApiUtils;
 import mz.ac.ucmins.api.SenaiteEndpoint;
 import retrofit2.Call;
@@ -33,7 +32,7 @@ public class GetAnalysisRequest extends Activity {
         super.onCreate(savedInstanceState);
         AnalysisResquest aR = (AnalysisResquest) getIntent().getSerializableExtra("result");
         pat = (Patient) getIntent().getSerializableExtra("patient");
-        sampleService = new ApiUtils().getSenaiteEndpoint(this, getString(R.string.apibaseurl));
+        sampleService = new ApiUtils().getSenaiteEndpoint(this);
         //aR=new AnalysisResquest();
         p= new Patient();
         pL = new PatientList();

@@ -7,33 +7,35 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import androidx.appcompat.app.AppCompatActivity;
 import co.mz.ucmins.R;
 import mz.ac.ucmins.Model.User;
 
 public class MainActivity extends AppCompatActivity {
 
- private Handler handler;
- private Runnable runnable;
- private ImageView splash;
- private TextView textView;
- private Animation topAnim;
- private Animation bottomAnim;
- private FirebaseAuth mAuth;
- private SharedPreferences preferences;
- private SharedPreferences.Editor editor;
+    private static final String TAG = ".MainActivity";
+    private Handler handler;
+    private Runnable runnable;
+    private ImageView splash;
+    private TextView textView;
+    private Animation topAnim;
+    private Animation bottomAnim;
+    private FirebaseAuth mAuth;
+    private SharedPreferences preferences;
+    private SharedPreferences.Editor editor;
 
- private User user;
-
+    private User user;
 
 
     @Override
@@ -108,45 +110,56 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void showHomeUI(FirebaseUser user) {
+        //showLogin();
         if (user != null) {
-            System.out.println("has user firebase");
+            Log.d(TAG, "ShowHomwUI: firebase user not Null");
             if (preferences.getString("LoginPref", "nopref").equals("nopref")) {
-                System.out.println("has user firebase and no sharedpref");
+                Log.d(TAG, "ShowHomeUI: Login Pref does not exists");
                 showLogin();
             } else {
+                Log.d(TAG, "ShowHomeUI: Both Login Pref and Firebase User exists ");
                 showHome(user);
             }
         } else {
+            Log.d(TAG, "ShowHomwUI: firebase user is Null");
             showLogin();
         }
     }
 
     private void showHome(FirebaseUser user) {
-        handler= new Handler();
-        System.out.println(preferences.getAll());
-        System.out.println("Token"+ user.getEmail());
+        Log.d(TAG, "showHome: preparing to login");
+        handler = new Handler();
+
+        Log.d(TAG, "showHome: the current prefs are " + preferences.getAll());
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent dsp = new Intent(MainActivity.this,HomePage.class);
+                Intent dsp = new Intent(MainActivity.this, HomePage.class);
                 startActivity(dsp);
                 finish();
             }
-        }, 6000);
+        }, 3000);
 
     }
 
     private void showLogin() {
-        handler= new Handler();
-
+        Log.d(TAG, "showLogin: called");
+        handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent dsp = new Intent(MainActivity.this,LoginPage.class);
+                Intent dsp = new Intent(MainActivity.this, LoginPage.class);
                 startActivity(dsp);
                 finish();
             }
-        }, 6000);
+        }, 3000);
+    }
+
+    private boolean isServerConfigOk() {
+
+
+        return true;
+
     }
 
 

@@ -4,15 +4,26 @@ import java.io.Serializable;
 
 public class ItemResult implements Serializable {
 
-    private String phone, name;
+    private String phone, name, lastname;
     private int img;
     private boolean isSelected;
+
 
     public ItemResult(String phone, String name, int img, boolean isSelected) {
         this.phone = phone;
         this.name = name;
         this.img = img;
-        this.isSelected= isSelected;
+        this.isSelected = isSelected;
+    }
+
+    public ItemResult() {
+
+    }
+
+    public ItemResult(AnalysisResquest aR, Patient patient) {
+        phone = patient.getMobilePhone();
+        name = patient.getFirstname();
+        lastname = patient.getSurname();
     }
 
     public String getPhone() {

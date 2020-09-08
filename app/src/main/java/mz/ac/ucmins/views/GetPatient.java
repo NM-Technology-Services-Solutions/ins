@@ -9,7 +9,6 @@ import com.google.gson.Gson;
 import mz.ac.ucmins.Model.AnalysisResquest;
 import mz.ac.ucmins.Model.Patient;
 import mz.ac.ucmins.Model.PatientList;
-import co.mz.ucmins.R;
 import mz.ac.ucmins.api.ApiUtils;
 import mz.ac.ucmins.api.SenaiteEndpoint;
 import retrofit2.Call;
@@ -25,7 +24,7 @@ public class GetPatient extends Activity {
         super.onCreate(savedInstanceState);
          aR = (AnalysisResquest) getIntent().getSerializableExtra("result");
         p = new Patient();
-        sampleService = new ApiUtils().getSenaiteEndpoint(this, getString(R.string.apibaseurl));
+        sampleService = new ApiUtils().getSenaiteEndpoint(this);
         //aR=new AnalysisResquest();
 
         pL = new PatientList();

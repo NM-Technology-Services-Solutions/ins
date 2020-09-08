@@ -10,26 +10,25 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.preference.PreferenceManager;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.gson.Gson;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.preference.PreferenceManager;
 import co.mz.ucmins.R;
 import mz.ac.ucmins.Model.User;
 
 public class HomePage extends AppCompatActivity {
- private TextView userName;
- 
-    private static final String TAG = "MainActivity";
+    private static final String TAG = ".HomePage";
+    public static boolean isAppRunning;
+    private TextView userName;
     private SharedPreferences preferences;
 
     @Override
@@ -41,66 +40,14 @@ public class HomePage extends AppCompatActivity {
         preferences = getApplicationContext().getSharedPreferences("LoginPref", MODE_PRIVATE);
 
         //check SDK version from the users Device
-        System.out.println("Preferences"+ preferences.getAll());
+
+        Log.d(TAG, "onCreate: current login preferences are: " + preferences.getAll());
 
         userName = findViewById(R.id.username);
         Bundle extras = getIntent().getExtras();
-        if (preferences.contains("LoginPref")){
-            Gson gson = new Gson();
-            String json = preferences.getString("LoginPref", "");
-            User user = gson.fromJson(json, User.class);
 
-            System.out.println(user.getRoles().contains("Manager"));
-            userName.setText(user.getUsername());
-            if(user.getRoles().contains("LabManager")){
+        subscribeToChanel();
 
-                FirebaseMessaging.getInstance().subscribeToTopic("weather")
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                String msg = getString(R.string.msg_subscribed);
-                                if (!task.isSuccessful()) {
-                                    msg = getString(R.string.msg_subscribe_failed);
-                                }
-                                Log.d(TAG, msg);
-                                Toast.makeText(HomePage.this, msg, Toast.LENGTH_SHORT).show();
-
-                            }
-                        });
-                FirebaseInstanceId.getInstance().getInstanceId()
-                        .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<InstanceIdResult> task) {
-                                if (!task.isSuccessful()) {
-                                    Log.w(TAG, "getInstanceId failed", task.getException());
-                                    return;
-                                }
-
-                                // Get new Instance ID token
-                                String token = task.getResult().getToken();
-
-                                // Log and toast
-                                String msg = getString(R.string.msg_token_fmt, token);
-                                Log.d(TAG, msg);
-                                Toast.makeText(HomePage.this, msg, Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                // [END retrieve_current_token]
-            }
-        }else {
-            userName.setText("Nome do Usuario");
-        }
-
-
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action",
-                        Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         // Sets default values only once, first time this is called.
         // The third argument is a boolean that indicates whether
@@ -122,9 +69,50 @@ public class HomePage extends AppCompatActivity {
                 Toast.LENGTH_SHORT).show();
     }
 
+    private void subscribeToChanel() {
+        Log.d(TAG, "subscribeToChanel: Attempting to subscribe to FCM channel");
+        if (preferences.contains("LoginPref")) {
+            Gson gson = new Gson();
+            String json = preferences.getString("LoginPref", "");
+            User user = gson.fromJson(json, User.class);
 
+            System.out.println(user.getRoles().contains("Manager"));
+            userName.setText(user.getUsername());
+            if (user.getRoles().contains("LabManager")) {
 
+                FirebaseMessaging.getInstance().subscribeToTopic("weather")
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                String msg = getString(R.string.msg_subscribed);
+                                if (!task.isSuccessful()) {
+                                    msg = getString(R.string.msg_subscribe_failed);
+                                }
+                                Log.d(TAG, msg);
+                            }
+                        });
+                FirebaseInstanceId.getInstance().getInstanceId()
+                        .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                                if (!task.isSuccessful()) {
+                                    Log.w(TAG, "getInstanceId failed", task.getException());
+                                    return;
+                                }
+                                // Get new Instance ID token
+                                String token = task.getResult().getToken();
 
+                                // Log and toast
+                                String msg = getString(R.string.msg_token_fmt, token);
+                                Log.d(TAG, msg);
+                            }
+                        });
+                // [END retrieve_current_token]
+            }
+        }else {
+            userName.setText("Nome do Usuario");
+        }
+    }
 
 
     public void resultados(View view) {
@@ -144,10 +132,14 @@ public class HomePage extends AppCompatActivity {
         startActivity(entrar);
     }
 
+    public void verNotificacoesPendentes(View view) {
+        Intent entrar = new Intent(this, NotificationsPendentes.class);
+        startActivity(entrar);
+    }
 
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }

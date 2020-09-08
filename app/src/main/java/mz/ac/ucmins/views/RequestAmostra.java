@@ -7,15 +7,16 @@ import android.util.Pair;
 import android.view.View;
 import android.widget.ImageView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.Gson;
 
-import androidx.appcompat.app.AppCompatActivity;
+import co.mz.ucmins.R;
 import mz.ac.ucmins.Model.AnalysisRequestList;
 import mz.ac.ucmins.Model.AnalysisResquest;
 import mz.ac.ucmins.Model.Patient;
 import mz.ac.ucmins.Model.PatientList;
-import co.mz.ucmins.R;
 import mz.ac.ucmins.api.ApiUtils;
 import mz.ac.ucmins.api.SenaiteEndpoint;
 import retrofit2.Call;
@@ -40,9 +41,9 @@ private TextInputEditText editText;
 
         amostra_backArrow_btn = findViewById(R.id.amostra_backArrow_btn);
         editText = findViewById(R.id.codigoAmostra);
-        sampleService = new ApiUtils().getSenaiteEndpoint(this, getString(R.string.apibaseurl));
-        aR=new AnalysisResquest();
-        p= new Patient();
+        sampleService = new ApiUtils().getSenaiteEndpoint(this);
+        aR = new AnalysisResquest();
+        p = new Patient();
         pL = new PatientList();
 
     }

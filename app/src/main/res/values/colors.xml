@@ -11,4 +11,16 @@
     <color name="colorDarkBlue3">#565A7B</color>
     <color name="grey_40">#bcbcbc</color>
     <color name="colorWhite">#FFF</color>
+
+
+    <color name="colorPrimaryDark">#3f180f</color>
+
+    <color name="backgroundColor">#000000</color>
+    <color name="textColor">#FFFFFF</color>
+    <color name="buttonColor">#FF0000</color>
+
+    <color name="placeholder_grey">#AAADC4</color>
+    <color name="placeholder_grey_20">#33AAADC4</color>
+
+
 </resources>
