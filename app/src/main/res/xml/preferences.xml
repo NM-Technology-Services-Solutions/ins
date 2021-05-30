@@ -13,13 +13,13 @@
     <EditTextPreference
         android:key="senaite_base_url_preference"
         android:title="@string/title_senaite_base_url_preference"
-        android:defaultValue="http://2a6ee1155234.ngrok.io"
+        android:defaultValue="http://34.69.223.48:8080/senaite"
         android:summary="@string/summary_senaite_base_url_preference"
         android:dialogTitle="@string/dialog_title_senaite_base_url_preference"
         android:dependency="checkbox_preference" />
 
     <EditTextPreference
-        android:defaultValue="http://2a6ee1155234.ngrok.io"
+        android:defaultValue="http://34.69.223.48:8080/senaite"
         android:key="senaite_root"
         android:selectAllOnFocus="true"
         android:singleLine="true"

@@ -6,6 +6,8 @@ import android.view.MenuItem;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NavUtils;
+import androidx.preference.PreferenceFragment;
+import androidx.preference.PreferenceFragmentCompat;
 import co.mz.ucmins.R;
 
 public class SettingsActivity extends AppCompatActivity {
@@ -33,6 +35,8 @@ public class SettingsActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 
 
 }

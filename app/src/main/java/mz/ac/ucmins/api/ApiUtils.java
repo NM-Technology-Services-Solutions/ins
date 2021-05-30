@@ -25,12 +25,12 @@ public class ApiUtils extends Application {
     public static SenaiteEndpoint getSenaiteEndpoint(Context c) {
         preferences = PreferenceManager.getDefaultSharedPreferences(c);
         editor = preferences.edit();
-        BASE_URL = setBaseUrlFromPreferences(preferences.getString("senaite_base_url_preference", "http://192.168.0.4:8080/smartlabs/@@API/senaite/v1/"));
+        BASE_URL = setBaseUrlFromPreferences(preferences.getString("senaite_base_url_preference", "http://34.69.223.48:8080/senaite/@@API/senaite/v1/"));
 
 
         //resultsAvailableService= senaiteEndpoint;
         Log.d(TAG, "The end point is now: " + BASE_URL);
-        return getClient(BASE_URL, c).create(SenaiteEndpoint.class);
+        return getClient(BASE_URL+"/@@API/senaite/v1/", c).create(SenaiteEndpoint.class);
     }
 
     private static String setBaseUrlFromPreferences(String base_url) {

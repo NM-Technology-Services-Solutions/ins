@@ -171,6 +171,8 @@ public class LoginPage extends AppCompatActivity {
                     }
                 } else {
                     Toast.makeText(LoginPage.this, "Error! Please  try again!", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(LoginPage.this, response.message(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginPage.this, response.toString(), Toast.LENGTH_SHORT).show();
                 }
             }
 

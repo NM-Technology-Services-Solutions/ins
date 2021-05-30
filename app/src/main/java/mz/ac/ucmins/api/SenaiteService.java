@@ -46,7 +46,7 @@ public class SenaiteService extends Application {
 
     String getBaseUrl() {
         if (preferences.contains("BASE_URL")) {
-            return preferences.getString("BASE_URL", "");
+            return preferences.getString("BASE_URL"+"/@@API/senaite/v1/", "");
 
 
         }
