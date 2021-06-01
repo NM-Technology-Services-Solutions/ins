@@ -20,6 +20,8 @@ import java.util.List;
 
 import co.mz.ucmins.R;
 import mz.ac.ucmins.Adapters.AdapterListInbox;
+import mz.ac.ucmins.Model.AnalysisRequestList;
+import mz.ac.ucmins.Model.AnalysisResquest;
 import mz.ac.ucmins.Model.Inbox;
 import mz.ac.ucmins.Model.ItemResult;
 import mz.ac.ucmins.Model.sms.Message;
@@ -39,7 +41,7 @@ public class NotificationsPendentes extends AppCompatActivity implements Firebas
     private RecyclerView recyclerView;
     private AdapterListInbox mAdapter;
     private ActionModeCallback actionModeCallback;
-    private androidx.appcompat.view.ActionMode actionMode;
+    private ActionMode actionMode;
     private Toolbar toolbar;
     private List<Inbox> items = new ArrayList<>();
     private FloatingActionButton fab_Load;
@@ -116,6 +118,7 @@ public class NotificationsPendentes extends AppCompatActivity implements Firebas
 
             @Override
             public void onItemLongClick(View view, Inbox obj, int pos) {
+                Toast.makeText(getApplicationContext(), "Read: " + pos, Toast.LENGTH_SHORT).show();
                 enableActionMode(pos);
             }
         });
@@ -158,7 +161,7 @@ public class NotificationsPendentes extends AppCompatActivity implements Firebas
                 Log.d(TAG, "Message sucess?");
                 Log.d(TAG, "onResponse: " + response.body());
 
-            /*    AnalysisRequestList arl = response.body();
+               AnalysisRequestList arl = response.body();
                 System.out.println(itemResultList.size());
                 for(AnalysisResquest ar: arl.getItems()){
                     System.out.println(ar.getGetClientID());
@@ -174,7 +177,7 @@ public class NotificationsPendentes extends AppCompatActivity implements Firebas
 
                 System.out.println("here"+preferences.getAll());
                 System.out.println(y);
-                //res = ar.getItems();*/
+                res = ar.getItems();
 
 
             }
@@ -193,7 +196,7 @@ public class NotificationsPendentes extends AppCompatActivity implements Firebas
 
     private void enableActionMode(int position) {
         if (actionMode == null) {
-            //actionMode = startSupportActionMode(actionModeCallback);
+            actionMode = startActionMode(actionModeCallback);
         }
         toggleSelection(position);
     }
