@@ -4,6 +4,7 @@ import java.util.List;
 
 import io.grpc.internal.JsonUtil;
 import mz.ac.ucmins.Model.Analysis;
+import mz.ac.ucmins.Model.AnalysisList;
 import mz.ac.ucmins.Model.AnalysisRequestList;
 import mz.ac.ucmins.Model.LoginResponse;
 import mz.ac.ucmins.Model.Patient;
@@ -45,7 +46,7 @@ public interface SenaiteEndpoint {
     //@GET("analysisservice/{analysisrequest}")
     // Call<AnalysisService> getAnalysisRequest(@Path("analysisservice") String analysisservice);
     @GET("analysis/{uid}")
-    Call<Analysis> getAnalysis(@Path("uid") String uid);
+    Call<AnalysisList> getAnalysis(@Path("uid") String uid);
 
     @GET("doctor/{uid}")
     Call<Patient> getDoctor(@Path("uid") String uid);

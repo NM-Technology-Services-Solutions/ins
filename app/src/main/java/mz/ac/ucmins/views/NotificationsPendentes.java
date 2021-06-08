@@ -1,5 +1,6 @@
 package mz.ac.ucmins.views;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ActionMode;
@@ -20,8 +21,6 @@ import java.util.List;
 
 import co.mz.ucmins.R;
 import mz.ac.ucmins.Adapters.AdapterListInbox;
-import mz.ac.ucmins.Model.AnalysisRequestList;
-import mz.ac.ucmins.Model.AnalysisResquest;
 import mz.ac.ucmins.Model.Inbox;
 import mz.ac.ucmins.Model.ItemResult;
 import mz.ac.ucmins.Model.sms.Message;
@@ -66,7 +65,7 @@ public class NotificationsPendentes extends AppCompatActivity implements Firebas
         toolbar = findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_menu);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Inbox");
+        getSupportActionBar().setTitle("Prontos a Notificar");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Tools.setSystemBarColor(this, R.color.colorPrimary);
     }
@@ -161,7 +160,8 @@ public class NotificationsPendentes extends AppCompatActivity implements Firebas
                 Log.d(TAG, "Message sucess?");
                 Log.d(TAG, "onResponse: " + response.body());
 
-               AnalysisRequestList arl = response.body();
+
+            /*    AnalysisRequestList arl = response.body();
                 System.out.println(itemResultList.size());
                 for(AnalysisResquest ar: arl.getItems()){
                     System.out.println(ar.getGetClientID());
@@ -177,7 +177,7 @@ public class NotificationsPendentes extends AppCompatActivity implements Firebas
 
                 System.out.println("here"+preferences.getAll());
                 System.out.println(y);
-                res = ar.getItems();
+                //res = ar.getItems();*/
 
 
             }
@@ -188,8 +188,11 @@ public class NotificationsPendentes extends AppCompatActivity implements Firebas
             }
 
         });
+        Toast.makeText(this, "Notificado Com sucesso", 3);
         System.out.println("Result List Size" + itemResultList.size());
         //return itemResultList;
+        Intent entrar = new Intent(this, HomePage.class);
+        startActivity(entrar);
 
 
     }

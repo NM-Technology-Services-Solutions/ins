@@ -229,7 +229,7 @@ public class AnalysisResquest implements Serializable {
     private String creatorEmail;
     @SerializedName("Analyses")
     @Expose
-    private List<Analysis> analyses = null;
+    private List<AnalysisResponseSet> analyses = null;
     @SerializedName("getDoctorID")
     @Expose
     private Object getDoctorID;
@@ -953,11 +953,11 @@ public class AnalysisResquest implements Serializable {
         this.creatorEmail = creatorEmail;
     }
 
-    public List<Analysis> getAnalyses() {
+    public List<AnalysisResponseSet> getAnalyses() {
         return analyses;
     }
 
-    public void setAnalyses(List<Analysis> analyses) {
+    public void setAnalyses(List<AnalysisResponseSet> analyses) {
         this.analyses = analyses;
     }
 
@@ -1371,5 +1371,3 @@ public class AnalysisResquest implements Serializable {
 
 
 }
-
-

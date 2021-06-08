@@ -13,14 +13,22 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.gson.Gson;
 
 import co.mz.ucmins.R;
+import mz.ac.ucmins.Model.LoginResponse;
 import mz.ac.ucmins.Model.User;
+import mz.ac.ucmins.api.ApiUtils;
+import mz.ac.ucmins.api.SenaiteEndpoint;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences.Editor editor;
 
     private User user;
+    private SenaiteEndpoint userService;
 
 
     @Override
@@ -67,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
 
         splash.setAnimation(topAnim);
         textView.setAnimation(bottomAnim);
-
+        userService = ApiUtils.getSenaiteEndpoint(this);
         mAuth = FirebaseAuth.getInstance();
 
 /*        handler= new Handler();
@@ -90,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
         //user = new User();
+
         showHomeUI(currentUser);
 
     }
@@ -118,7 +128,9 @@ public class MainActivity extends AppCompatActivity {
                 showLogin();
             } else {
                 Log.d(TAG, "ShowHomeUI: Both Login Pref and Firebase User exists ");
+                doLogin(preferences.getString("username","nill"),preferences.getString("password","nill"));
                 showHome(user);
+
             }
         } else {
             Log.d(TAG, "ShowHomwUI: firebase user is Null");
@@ -162,5 +174,44 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void doLogin(final String username, final String password) {
 
+        Call<LoginResponse> call = userService.login(username, password);
+        call.enqueue(new Callback<LoginResponse>() {
+            @Override
+            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                if (response.isSuccessful()) {
+                    LoginResponse resObj = response.body();
+                    User user = resObj.getItems().get(0);
+                    if (resObj.getItems().get(0).isAuthenticated()) {
+                        Gson gson = new Gson();
+                        String json = gson.toJson(user);
+
+                        editor.putString("username", username);
+                        editor.putString("password", password);
+                        editor.putString("LoginPref", json);
+                        editor.commit();
+                        //login start main activity
+                        Intent intent = new Intent(MainActivity.this, HomePage.class);
+                        intent.putExtra("username", user);
+
+                    } else {
+                        Toast.makeText(MainActivity.this, "The username or password is incorrect", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(MainActivity.this, "Error! Please  try again!", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(LoginPage.this, response.message(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, response.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+                Toast.makeText(MainActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(LoginPage.this, call.request().url().toString(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
 }

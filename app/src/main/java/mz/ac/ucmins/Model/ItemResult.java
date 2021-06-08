@@ -7,6 +7,7 @@ public class ItemResult implements Serializable {
     private String phone, name, lastname;
     private int img;
     private boolean isSelected;
+    private AnalysisResquest ar;
 
 
     public ItemResult(String phone, String name, int img, boolean isSelected) {
@@ -24,6 +25,14 @@ public class ItemResult implements Serializable {
         phone = patient.getMobilePhone();
         name = patient.getFirstname();
         lastname = patient.getSurname();
+        ar=aR;
+    }
+
+    public void setAr(AnalysisResquest aR){
+        this.ar=aR;
+    }
+    public AnalysisResquest getAr(){
+        return this.ar;
     }
 
     public String getPhone() {

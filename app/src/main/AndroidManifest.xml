@@ -13,8 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-
-        <activity android:name="mz.ac.ucmins.views.SettingsActivity"
+        <activity
+            android:name="mz.ac.ucmins.views.ResultDetailsActivity"
+            android:label="@string/title_activity_result_details"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name="mz.ac.ucmins.views.SettingsActivity"
             android:label="Settings"
             android:parentActivityName="mz.ac.ucmins.views.HomePage">
             <meta-data
@@ -76,11 +80,11 @@
             </intent-filter>
         </service>
     </application>
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission
         android:name="android.permission.USE_FINGERPRINT"
         tools:ignore="ManifestOrder" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <dist:module dist:instant="true" />
 

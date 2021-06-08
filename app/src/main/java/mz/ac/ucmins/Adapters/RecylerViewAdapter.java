@@ -2,6 +2,7 @@ package mz.ac.ucmins.Adapters;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,6 +32,7 @@ import java.util.Map;
 import co.mz.ucmins.R;
 import mz.ac.ucmins.Model.ItemResult;
 import mz.ac.ucmins.firebase.FirebaseClient;
+import mz.ac.ucmins.views.ResultDetailsActivity;
 
 
 public class RecylerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -49,6 +51,7 @@ public class RecylerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     private String errorMsg;
     private int selectCount = 0;
     private OnSelectedListener onSelectedListener;
+
 
     public RecylerViewAdapter(Context mContext, OnSelectedListener onSelectedListener) {
         this.mContext = mContext;
@@ -131,6 +134,16 @@ public class RecylerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                         toggleCheckedIcon(itemResultVH, position);
 
 
+                    }
+                });
+                itemResultVH.item_result.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View view) {
+                        Context context = view.getContext();
+                        Intent intent= new Intent(context, ResultDetailsActivity.class);
+                        intent.putExtra("analysisResult",data.getAr());
+                        context.startActivity(intent);
+                        return true;
                     }
                 });
                 break;
@@ -282,6 +295,11 @@ public class RecylerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         void onSelected(boolean selection);
 
     }
+    public interface OnLongPressedListener {
+        void onLongPressed(boolean selection);
+
+    }
+
 
     public class NoResultVH extends RecyclerView.ViewHolder {
         private LinearLayout item_result;
@@ -304,7 +322,7 @@ public class RecylerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         }
     }
 
-    public class ItemResultVH extends RecyclerView.ViewHolder {
+    public class ItemResultVH extends RecyclerView.ViewHolder implements View.OnLongClickListener {
         private LinearLayout item_result;
         private TextView textView_nome;
         private TextView textView_phone;
@@ -330,6 +348,10 @@ public class RecylerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         }
 
 
+        @Override
+        public boolean onLongClick(View view) {
+            return false;
+        }
     }
 
     public class LoadingResultVH extends RecyclerView.ViewHolder implements View.OnClickListener {

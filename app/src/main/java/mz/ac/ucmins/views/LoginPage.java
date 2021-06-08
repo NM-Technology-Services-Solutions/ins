@@ -132,7 +132,7 @@ public class LoginPage extends AppCompatActivity {
 
     }
 
-    private void doLogin(final String username, final String password) {
+    public void doLogin(final String username, final String password) {
 
         Call<LoginResponse> call = userService.login(username, password);
         call.enqueue(new Callback<LoginResponse>() {

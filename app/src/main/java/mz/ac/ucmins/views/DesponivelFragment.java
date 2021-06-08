@@ -138,6 +138,8 @@ public class DesponivelFragment extends Fragment implements RecylerViewAdapter.O
         editor = preferences.edit();
 
         ((ResultsPageContainer) getActivity()).drawBadge();
+        //((LoginPage.doLogin(preferences.getString("username","nill"),preferences.getString("password","nill");
+
 
 
     }
@@ -206,6 +208,7 @@ public class DesponivelFragment extends Fragment implements RecylerViewAdapter.O
                     currentPage = analysisRequestList.getPage();
                     itemResultList = senaiteService.getSamplesAndPatients(analysisRequestList.getItems());
                     Log.d(TAG, "loadingFirstPage from: " + TOTAL_PAGES);
+                    Log.d(TAG, "loadingFirstPage from number of results: " + analysisRequestList.getItems().size());
                     getActivity().runOnUiThread(new Runnable() {
 
                         @Override
@@ -436,7 +439,7 @@ public class DesponivelFragment extends Fragment implements RecylerViewAdapter.O
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        ((ResultsPageContainer) getActivity()).drawBadge();
     }
 
     @Override

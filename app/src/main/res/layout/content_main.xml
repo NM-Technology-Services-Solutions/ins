@@ -336,6 +336,7 @@
                     android:layout_height="120dp"
                     android:layout_weight="1"
                     app:cardCornerRadius="8dp"
+                    android:id="@+id/verNotificacoesPendentesID"
                     android:onClick="verNotificacoesPendentes"
                     app:cardElevation="2dp">
 
@@ -369,6 +370,7 @@
                     android:layout_marginStart="18dp"
                     android:layout_weight="1"
                     android:onClick="aprovar"
+                    android:id="@+id/aprovarResultadosID"
                     app:cardCornerRadius="8dp"
                     app:cardElevation="2dp">
 
@@ -411,6 +413,7 @@
                     android:layout_height="120dp"
                     android:layout_weight="1"
                     app:cardCornerRadius="8dp"
+                    android:id="@+id/verSolicitacoesPendentesID"
                     app:cardElevation="2dp">
 
                     <RelativeLayout

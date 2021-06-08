@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.google.gson.Gson;
+
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.IOException;
@@ -12,6 +14,8 @@ import java.util.List;
 
 import co.mz.ucmins.R;
 import mz.ac.ucmins.Adapters.RecylerViewAdapter;
+import mz.ac.ucmins.Model.Analysis;
+import mz.ac.ucmins.Model.AnalysisList;
 import mz.ac.ucmins.Model.AnalysisRequestList;
 import mz.ac.ucmins.Model.AnalysisResquest;
 import mz.ac.ucmins.Model.ItemResult;
@@ -61,7 +65,26 @@ public class SenaiteService extends Application {
         Response<AnalysisRequestList> analysisRequestListResponse = call.execute();
 
         if (analysisRequestListResponse.isSuccessful()) {
-            System.out.println(analysisRequestListResponse.body().getCount());
+            System.out.println("Results from Senaite Service Disponivel: "+analysisRequestListResponse.body().getCount());
+            System.out.println("Results from Senaite Service Disponivel raw:" +new Gson().toJson(analysisRequestListResponse.body()));
+            System.out.println("Response code: "+ analysisRequestListResponse.code());
+            return analysisRequestListResponse.body();
+        } else {
+            return null;
+        }
+    }
+
+    public AnalysisList getAnalysisFromSenaite(String uuid) throws IOException {
+
+
+        Call<AnalysisList> call = resultsAvailableService.getAnalysis(uuid);
+        System.out.println(call.request().url());
+        Response<AnalysisList> analysisRequestListResponse = call.execute();
+
+        if (analysisRequestListResponse.isSuccessful()) {
+            System.out.println("Results for the Patient: "+analysisRequestListResponse.body().getCount());
+            System.out.println("Results for the Patient raw:" +new Gson().toJson(analysisRequestListResponse.body()));
+            System.out.println("Response code: "+ analysisRequestListResponse.code());
             return analysisRequestListResponse.body();
         } else {
             return null;

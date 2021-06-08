@@ -60,7 +60,7 @@ public class ResultsPageContainer extends AppCompatActivity implements SharedPre
 
                 switch (position) {
                     case 0: {
-                        tab.setText("Desponiveis");
+                        tab.setText("Disponiveis");
                         tab.setIcon(R.drawable.ic_confirmed);
                         BadgeDrawable badgeDrawable = tab.getOrCreateBadge();
                         badgeDrawable.setBackgroundColor(ContextCompat.getColor(
@@ -92,6 +92,7 @@ public class ResultsPageContainer extends AppCompatActivity implements SharedPre
     }
 
     public void drawBadge() {
+        System.out.println("prefs: " +preferences.toString());
         int val1 = preferences.getInt("resultados_disponiveis",0);
         int val2 = preferences.getInt("resultados_pendentes",0);
 
