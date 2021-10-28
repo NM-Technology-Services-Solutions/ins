@@ -178,9 +178,15 @@ public class LoginPage extends AppCompatActivity {
 
             @Override
             public void onFailure(Call call, Throwable t) {
-                Toast.makeText(LoginPage.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+/*                Toast.makeText(LoginPage.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                 //Toast.makeText(LoginPage.this, call.request().url().toString(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(LoginPage.this, SettingsActivity.class);
+                startActivity(intent);*/
+
+                //login start main activity
+                Intent intent = new Intent(LoginPage.this, HomePage.class);
+                intent.putExtra("username", "Demonstracao");
+
                 startActivity(intent);
             }
         });

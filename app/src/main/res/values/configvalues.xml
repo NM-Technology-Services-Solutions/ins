@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="apibaseurl">http://34.69.223.48:8080/senaite/@@API/senaite/v1/</string>
+    <string name="apibaseurl">http://ca74-189-226-13-32.ngrok.io/senaite/@@API/senaite/v1/</string>
 
 </resources>

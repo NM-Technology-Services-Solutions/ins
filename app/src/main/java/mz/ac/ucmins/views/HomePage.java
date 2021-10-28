@@ -24,6 +24,9 @@ import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import co.mz.ucmins.R;
 import mz.ac.ucmins.Model.LoginResponse;
 import mz.ac.ucmins.Model.User;
@@ -61,7 +64,15 @@ public class HomePage extends AppCompatActivity {
         Log.d(TAG, "onCreate: current login preferences are: " + preferences.getAll());
        Gson gson = new Gson();
         String json = preferences.getString("LoginPref", "");
-         user = gson.fromJson(json, User.class);
+         //user = gson.fromJson(json, User.class);
+
+        //fortest start here
+        user= new User();
+        user.setUsername("Tilson");
+        List<String> roles2 = new ArrayList<>();
+        roles2.add("LabManager");
+        user.setRoles(roles2);
+        //fortest ends here
         userName = findViewById(R.id.username);
         Bundle extras = getIntent().getExtras();
 
@@ -129,7 +140,7 @@ toggleButtons();
                 // [END retrieve_current_token]
             }
         }else {
-            userName.setText("Nome do Usuario");
+            userName.setText(user.username);
         }
     }
 
